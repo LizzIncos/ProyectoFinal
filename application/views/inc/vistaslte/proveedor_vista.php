@@ -21,7 +21,7 @@
 
         </div>
         </div>
-        <div class="content-detached content-left">
+        <div class="content-detached content-center">
           <div class="content-body"><div id="wallet">
 
   
@@ -61,11 +61,12 @@
                                                 <td><?php echo $row->estado; ?></td>                                                
                                                 
                                                 <td>
+                                                <div style="display: flex; align-items: center;">
                                                     <?php
                                                     echo form_open_multipart("proveedor/modificar");
                                                     ?>
                                                         <input type="hidden" name="idproveedor" value="<?php echo $row->idproveedor; ?>">
-                                                        <button type="submit" class="btn btn-success">Modificar</button>
+                                                        <button type="submit" class="btn btn-success mr-2"><i class="fas fa-pencil-alt"></i></button>
                                                     <?php  
                                                     echo form_close();
                                                     ?>	
@@ -73,11 +74,11 @@
                                                     echo form_open_multipart("proveedor/eliminarbd");
                                                     ?>
                                                         <input type="hidden" name="idproveedor" value="<?php echo $row->idproveedor; ?>">
-                                                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                                                        <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt text-secondary font-16"></i></button>
                                                     <?php  
                                                     echo form_close();
                                                     ?>                                                  
-                                                    
+                                                </div> 
                                                 </td>
                                             </tr><!--end tr-->
                                             <?php
