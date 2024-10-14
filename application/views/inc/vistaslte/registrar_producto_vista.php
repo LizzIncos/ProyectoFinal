@@ -17,14 +17,14 @@
          
         </div>
         <div class="content-body"><div class="row">
-    <div class="col-12 col-md-8">
+    <div class="col-12 col-md-6">
         <!-- User Profile -->
         <section class="card">
             <div class="card-content">
                 <div class="card-body">
                     <div class="col-12">
                         <div class="row">
-                            <div class="col-md-2 col-12">
+                            <div class="col-md-2 col-8">
                                 
                             </div>
                             <div class="col-md-10 col-12">
