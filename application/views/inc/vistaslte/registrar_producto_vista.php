@@ -87,7 +87,10 @@
             </div>
         </section>
     </div>
-    <div class="col-12 col-md-4">
+    <?php
+    echo form_open_multipart("producto/agregarbdd");
+    ?>
+    <div class="col-12 col-md-12">
         <div class="card">
             <div class="card-header">
                 <h6 class="card-title text-center">Producto</h6>
@@ -100,39 +103,58 @@
                         </div>
                     </div>
                     <h3 class="text-center">Cargar Producto</h3>
+                    <div class="form-group">
+                        <label for="imageUpload">Subir Imagen del Producto</label>
+                        <input type="file" id="imageUpload" name="imageUpload" accept="image/*" required>
+                    </div>
+                    <p id="productInfo" class="text-center"></p>
                 </div>
                 <div class="table-responsive">
-                    <table class="table table-de mb-0">
+                    <table class="table table-de mb-3">
                         <tbody>
                             <tr>
                                 <td>Nombre</td>
-                                <td><i class="icon-layers"></i> </td>
+                                <td>
+                                    <input type="text" class="form-control" name="nombre" value="<?php echo isset($nombre) ? $nombre : ''; ?>" required> 
+                                </td>
                             </tr>
                             <tr>
                                 <td>Categoria</td>
-                                <td><i class="icon-layers"></i> </td>
+                                <td>
+                                    <input type="text" class="form-control" name="categoria" value="<?php echo isset($categoria) ? $categoria : ''; ?>" required>
+                                </td>
+                                </td>
                             </tr>
-                            <tr>
-                                <td>Proveedor</td>
-                                <td><i class="icon-layers"></i> </td>
-                            </tr>
+                           
                             <tr>
                                 <td>Cantidad</td>
-                                <td><i class="icon-layers"></i> </td>
+                                <td>
+                                    <input type="number" class="form-control" name="cantidad" value="<?php echo isset($cantidad) ? $cantidad : ''; ?>" required>
+                                </td>
                             </tr>
                             <tr>
                                 <td>Fecha Registro</td>
-                                <td><i class="icon-calendar"></i> </td>
+                                <td>
+                                    <input type="date" class="form-control" name="fecha" value="<?php echo isset($fecha) ? $fecha : ''; ?>" required>
+                                </td>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
+                </div>
+                <div class="col-12 text-right">
+                    <button type="submit" class="btn-gradient-primary my-1">Registrar Producto</button>
                 </div>
             </div>
         </div>
                
        
     </div>
+    <?php
+    echo form_close();
+    ?>
     </div>
+
 </div>
         </div>
       </div>

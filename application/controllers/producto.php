@@ -128,4 +128,55 @@ class Producto extends CI_Controller {
 		redirect('estudiante/deshabilitados','refresh');
 	}
 
+	public function agregarbdd()
+	{
+		$data['producto']='';
+		$data['categoria']='';
+		
+		$data['cantidad']=$_POST['cantidad'];
+		$data['fecha']=$_POST['fecha'];
+
+		
+
+        $capturedImage = $this->input->post('capturedImage');
+
+    	if ($capturedImage) {
+        	$url = 'http://127.0.0.1:5000/predict'; 
+        	$response = $this->call_api($url, $capturedImage);
+
+        // Procesar la respuesta de la API
+        	if (isset($response['prod_name'])) {
+            	$data['nombre'] = $response['prod_name']; 
+            	$data['categoria'] = $response['category']; 
+				
+		
+        	}
+			else{
+				$data['error'] = 'No se pudo obtener información del producto.';
+            	$this->load->view('producto/registrar', $data);
+            	return;
+			}
+    	}
+
+    	// Cargar la vista con los datos para mostrar al usuario
+    	$this->load->view('producto/registrar', $data);
+
+		$this->producto_model->agregarproducto($data);
+		redirect('producto/menu','refresh');
+		
+	}
+	private function call_api($url, $image_data) {
+		$ch = curl_init($url);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_POST, true);
+		curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode(['image' => $image_data]));
+	
+		$response = curl_exec($ch);
+		curl_close($ch);
+	
+		return json_decode($response, true);
+	}
+
+
 }
