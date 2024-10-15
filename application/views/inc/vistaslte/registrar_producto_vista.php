@@ -104,8 +104,8 @@
                     </div>
                     <h3 class="text-center">Cargar Producto</h3>
                     <div class="form-group">
-                        <label for="imageUpload">Subir Imagen del Producto</label>
-                        <input type="file" id="imageUpload" name="imageUpload" accept="image/*" required>
+                       
+                        <button type="button" onclick="window.location.href='<?php echo site_url('producto/iniciarCaptura'); ?>'" class="btn btn-primary">Cargar Producto</button>
                     </div>
                     <p id="productInfo" class="text-center"></p>
                 </div>

@@ -138,44 +138,40 @@ class Producto extends CI_Controller {
 
 		
 
-        $capturedImage = $this->input->post('capturedImage');
+         // Obtener datos capturados
+    $capturedData = $this->input->post(); // Recibir todos los datos enviados
 
-    	if ($capturedImage) {
-        	$url = 'http://127.0.0.1:5000/predict'; 
-        	$response = $this->call_api($url, $capturedImage);
+    // Verificar que los campos esperados están presentes
+    if (isset($capturedData['prod_name']) && isset($capturedData['category'])) {
+        $data['nombre'] = $capturedData['prod_name'];
+        $data['categoria'] = $capturedData['category'];
 
-        // Procesar la respuesta de la API
-        	if (isset($response['prod_name'])) {
-            	$data['nombre'] = $response['prod_name']; 
-            	$data['categoria'] = $response['category']; 
-				
-		
-        	}
-			else{
-				$data['error'] = 'No se pudo obtener información del producto.';
-            	$this->load->view('producto/registrar', $data);
-            	return;
-			}
-    	}
+        // Validar si se encontró información del producto
+        if (empty($data['nombre']) || empty($data['categoria'])) {
+            $data['error'] = 'No se pudo obtener información del producto.';
+            $this->load->view('producto/registrar', $data);
+            return;
+        }
+    } else {
+        $data['error'] = 'No se recibieron datos válidos del producto.';
+        $this->load->view('producto/registrar', $data);
+        return;
+    }
 
-    	// Cargar la vista con los datos para mostrar al usuario
-    	$this->load->view('producto/registrar', $data);
-
-		$this->producto_model->agregarproducto($data);
-		redirect('producto/menu','refresh');
+    // Registrar el producto en la base de datos
+    $this->producto_model->agregarproducto($data);
+    
+    // Redirigir al menú de productos
+    redirect('producto/menu', 'refresh');
 		
 	}
-	private function call_api($url, $image_data) {
-		$ch = curl_init($url);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($ch, CURLOPT_POST, true);
-		curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
-		curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode(['image' => $image_data]));
+	public function iniciarCaptura() {
+		
+		$command = escapeshellcmd('c:\Users\hp\Desktop\SIS INFORMATICOS\TiendaML\captura\captura.py'); 
+		shell_exec($command);
 	
-		$response = curl_exec($ch);
-		curl_close($ch);
-	
-		return json_decode($response, true);
+		
+		redirect('producto/agregar', 'refresh');
 	}
 
 
