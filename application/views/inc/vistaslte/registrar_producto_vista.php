@@ -115,13 +115,16 @@
                             <tr>
                                 <td>Nombre</td>
                                 <td>
-                                    <input type="text" class="form-control" name="nombre" value="<?php echo isset($nombre) ? $nombre : ''; ?>" required> 
+                                <?php $prod_name = $this->session->flashdata('prod_name'); ?>
+                                <input type="text" class="form-control" name="nombre" id="nombre" value="<?php echo $prod_name !== null ? $prod_name : ''; ?>" required>
                                 </td>
                             </tr>
                             <tr>
                                 <td>Categoria</td>
                                 <td>
-                                    <input type="text" class="form-control" name="categoria" value="<?php echo isset($categoria) ? $categoria : ''; ?>" required>
+                                <?php $category = $this->session->flashdata('category'); ?>
+                                <input type="text" class="form-control" name="categoria" id="categoria" value="<?php echo $category !== null ? $category : ''; ?>" required>
+                                    </td>
                                 </td>
                                 </td>
                             </tr>

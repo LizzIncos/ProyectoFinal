@@ -167,12 +167,20 @@ class Producto extends CI_Controller {
 	}
 	public function iniciarCaptura() {
 		
-		$command = escapeshellcmd('c:\Users\hp\Desktop\SIS INFORMATICOS\TiendaML\captura\captura.py'); 
-		shell_exec($command);
-	
-		
-		redirect('producto/agregar', 'refresh');
-	}
+		$url = 'http://127.0.0.1:5001/capture'; // URL de tu nueva API
+        $response = file_get_contents($url);
+        $data = json_decode($response, true);
 
+        // Procesar la respuesta
+        if (isset($data['prod_name']) && isset($data['category'])) {
+			$this->session->set_flashdata('captured_image', $data['image']);
+			$this->session->set_flashdata('prod_name', $data['prod_name']);
+			$this->session->set_flashdata('category', $data['category']);
+		} else {
+			$this->session->set_flashdata('error', 'No se pudo capturar la imagen.');
+		}
+
+        //redirect('producto/agregar', 'refresh');
+	}
 
 }
