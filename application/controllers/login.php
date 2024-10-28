@@ -11,14 +11,14 @@ class Login extends CI_Controller {
 				
 	}
 
-	public function validarusuario()
+	public function validarlogin()
 	{
-		$login=$_POST['login'];
+		$correo=$_POST['correo'];
 		$password=isset($_POST['password']) ? $_POST['password']:'';
 
-		echo $login;
+		echo $correo;
 		echo $password;
-		$consulta=$this->login_model->validar($login,$password);
+		$consulta=$this->login_model->validar($correo);
 
 		echo $consulta->num_rows();
 
@@ -29,9 +29,9 @@ class Login extends CI_Controller {
 			foreach($consulta->result() as $row)
 			{
 
-				$this->session->set_userdata('idusuario',$row->idUsuario);
-				$this->session->set_userdata('login',$row->login);
-				$this->session->set_userdata('tipo',$row->tipo);
+				$this->session->set_userdata('idusuarios',$row->idusuarios);
+				$this->session->set_userdata('correo',$row->correo);
+				$this->session->set_userdata('rol',$row->rol_idrol);
 
 				redirect('login/panel','refresh');
 			}
@@ -45,12 +45,12 @@ class Login extends CI_Controller {
 
 	public function panel()
 	{
-		if($this->session->userdata('login'))
+		if($this->session->userdata('correo'))
 		{
-			if($this->session->userdata('tipo')=='admin')
+			if($this->session->userdata('rol')=='4')
 			{
 				//el usr ya esta logueado
-				redirect('usuario/index','refresh');
+				redirect('dashboard/index','refresh');
 			}
 			else
 			{

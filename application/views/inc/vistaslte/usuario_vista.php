@@ -22,7 +22,7 @@
             <button type="button" class="btn-gradient-secondary btn-sm white" data-toggle="modal" data-target="#purchaseBTCModalLabel">Crear Usuario</button>
         </div>
         </div>
-        <div class="content-detached content-left">
+        <div class="content-detached content-center">
           <div class="content-body">
 
           <div class="row">
@@ -63,26 +63,25 @@
                                                 <td><?php echo $row->estado; ?></td>                                                
                                                 
                                                 <td>
+                                                <div style="display: flex; align-items: center;">
                                                     <?php
                                                     echo form_open_multipart("usuario/modificar");
                                                     ?>
                                                         <input type="hidden" name="idEstudiante" value="<?php echo $row->idEstudiante; ?>">
-                                                        
-                                                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#ModificarUsuario" >Modificar</button>
+                                                        <button type="button" class="btn btn-success mr-2" data-toggle="modal" data-target="#ModificarUsuario"><i class="fas fa-pencil-alt"></i></button>
                                                     <?php  
                                                     echo form_close();
                                                     ?>
-                                                </td>
-                                                <td>	
+                                                                                              	
                                                     <?php
                                                     echo form_open_multipart("usuario/eliminarbd");
                                                     ?>
                                                         <input type="hidden" name="idEstudiante" value="<?php echo $row->idEstudiante; ?>">
-                                                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                                                        <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt text-secondary font-16"></i></button>
                                                     <?php  
                                                     echo form_close();
                                                     ?>                                                  
-                                                    
+                                                </div>   
                                                 </td>
                                             </tr><!--end tr-->
                                             <?php
@@ -150,7 +149,7 @@
                     </div>
                 </div>
                 <?php
-                echo form_open_multipart("usuario/agregarbd");
+                echo form_open_multipart("usuario/agregarbdd");
                 ?>
                 <form class="form form-horizontal mt-2 mx-2">
                     <div class="form-body">

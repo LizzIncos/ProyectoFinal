@@ -17,8 +17,14 @@ class Inventario extends CI_Controller {
 		//{ 
 			//$idproducto=$this->input->get();
 		
+			
+			
 			$lista=$this->inventario_model->listainventario();
 			$data['inventario']=$lista;
+
+			$this->load->model('reabastecimiento_model');
+			
+            $this->reabastecimiento_model->ordenarReabastecimiento($lista);
 			
 			$data['infoproductos'] = $this->pedido_model->listaproductos();
 

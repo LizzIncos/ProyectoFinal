@@ -73,8 +73,10 @@
                 </ul>
               </li>
               
-              <li class="dropdown dropdown-user nav-item"><a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">             <span class="avatar avatar-online"><img src="../../../app-assets/images/portrait/small/avatar-s-1.png" alt="avatar"></span><span class="mr-1">CIC<span class="user-name text-bold-700">3,458.88</span></span></a>
-                <div class="dropdown-menu dropdown-menu-right">             <a class="dropdown-item" href="account-profile.html"><i class="ft-award"></i>John Doe</a>
+              <li class="dropdown dropdown-user nav-item"><a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">             <span class="avatar avatar-online"><img src="<?php echo base_url(); ?>admin/app-assets/images/portrait/small/avatar-s-1.png" alt="avatar"></span><span class="mr-1">CIC<span class="user-name text-bold-700">3,458.88</span></span></a>
+                <?php echo $this->session->userdata('correo');?>
+                <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href=""><i class="ft-award"></i><?php echo $this->session->userdata('correo'); ?></a>
+                
                   <div class="dropdown-divider"></div><a class="dropdown-item" href="account-profile.html"><i class="ft-user"></i> Perfil</a><a class="dropdown-item" href="transactions.html"><i class="ft-check-square"></i> Transacciones              </a>
                   <div class="dropdown-divider"></div><a class="dropdown-item" href="<?php echo base_url(); ?>index.php/login/logout"><i class="ft-power"></i> Logout</a>
                 </div>
@@ -89,9 +91,9 @@
 
 
     <div class="main-menu menu-fixed menu-dark menu-bg-default rounded menu-accordion menu-shadow">
-      <div class="main-menu-content"><a class="navigation-brand d-none d-md-block d-lg-block d-xl-block" href="index.html"><img class="brand-logo" alt="CryptoDash admin logo" src="../../../app-assets/images/logo/logo.png"/></a>
+      <div class="main-menu-content"><a class="navigation-brand d-none d-md-block d-lg-block d-xl-block" href="index.html"><img class="brand-logo" alt="CryptoDash admin logo" src="<?php echo base_url(); ?>admin/app-assets/images/logo/logo.png"/></a>
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-          <li class="active"><a href="../../../html/ltr/vertical-menu/index.html"><i class="icon-grid"></i><span class="menu-title" data-i18n="">Dashboard</span></a>
+          <li class="active"><a href="<?php echo base_url(); ?>index.php/dashboard/index"><i class="icon-grid"></i><span class="menu-title" data-i18n="">Dashboard</span></a>
           </li>
           <li class=" nav-item"><a href="<?php echo base_url(); ?>index.php/producto/menu"><i class="icon-layers"></i><span class="menu-title" data-i18n="">Productos</span></h>
           </li>
@@ -117,7 +119,13 @@
               </li>
             </ul>
           </li>
-          <li class=" nav-item"><a href="faq.html"><i class="icon-support"></i><span class="menu-title" data-i18n="">Ajustes</span></a>
+          <li class=" nav-item"><a href="#"><i class="icon-support"></i><span class="menu-title" data-i18n="">Pedidos</span></a>
+            <ul class="menu-content">
+              <li><a class="menu-item" href="<?php echo base_url(); ?>index.php/pedido/demo">Pedidos</a>
+              </li>
+              <li><a class="menu-item" href="<?php echo base_url(); ?>index.php/reabastecimiento/index">Reabastecimiento</a>
+              </li>
+            </ul>
           </li>
         </ul>
       </div>

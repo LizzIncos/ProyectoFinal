@@ -38,28 +38,53 @@
     <div class="col-12 d-flex align-items-center justify-content-center">
         <!-- image -->
         <div class="col-xl-3 col-lg-4 col-md-5 col-sm-5 col-12 p-0 text-center d-none d-md-block">
-            <div class="border-grey border-lighten-3 m-0 box-shadow-0 card-account-left height-400">
+            <div class="border-grey border-lighten-3 m-0 box-shadow-0 card-account-left height-600">
                 <img src="<?php echo base_url(); ?>admin/app-assets/images/pages/account-login.png" class="card-account-img width-200" alt="card-account-img">
             </div>
         </div>
         <!-- login form -->
-        <div class="col-xl-3 col-lg-4 col-md-5 col-sm-5 col-12 p-0">
-            <div class="card border-grey border-lighten-3 m-0 box-shadow-0 card-account-right height-400">                
+        <div class="col-xl-3 col-lg-5 col-md-5 col-sm-5 col-12 p-0">
+            <div class="card border-grey border-lighten-3 m-0 box-shadow-0 card-account-right height-600">                
                 <div class="card-content">                    
-                    <div class="card-body p-3">
+                    <div class="card-body p-1">
                         <p class="text-center h5 text-capitalize">Empieza en VisionStock!</p>
-                        <p class="mb-3 text-center">Crea tu cuenta</p>
+                        <p class="mb-2 text-center">Crea tu cuenta</p>
                            
                         <?php
                         echo form_open_multipart("usuario/agregarbd");
                         ?>                       
-                            
                             <fieldset class="form-label-group">
-                                <input type="password" class="form-control" id="user-password" placeholder="Your Email" required="" autofocus="">
-                                <label for="user-password">Email</label>
+                                <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Your Name" required="" autofocus="">
+                                <label for="nombre">Nombre</label>
                             </fieldset>
                             <fieldset class="form-label-group">
-                                <input type="password" class="form-control" id="user-password" placeholder="Your Email" required="" autofocus="">
+                                <input type="text" class="form-control" id="primerApellido" name="primerApellido" placeholder="Your Last Name" required="" autofocus="">
+                                <label for="primerApellido">Apellido Paterno</label>
+                            </fieldset>
+                            <fieldset class="form-label-group">
+                                <input type="text" class="form-control" id="segundoApellido" name="segundoApellido" placeholder="Your Last Name" required="" autofocus="">
+                                <label for="segundoApellido">Apellido Materno</label>
+                            </fieldset>
+                            <div class="form-group row">
+                                <div class="col-md-6">
+                                    <fieldset class="form-label-group">
+                                        <input type="text" class="form-control" id="carnet" name="carnet" placeholder="Your CI" required="" autofocus="">
+                                        <label for="carnet">Carnet</label>
+                                    </fieldset>
+                                </div>
+                                <div class="col-md-6">
+                                    <fieldset class="form-label-group">
+                                        <input type="text" class="form-control" id="telefono" name="telefono" maxlength="8" placeholder="Your Phone Number" required="" autofocus="">
+                                        <label for="telefono">Telefono</label>
+                                    </fieldset>  
+                                </div>
+                            </div> 
+                            <fieldset class="form-label-group">
+                                <input type="email" class="form-control" id="correo" name="correo" placeholder="Your Email" required="" autofocus="">
+                                <label for="correo">Email</label>
+                            </fieldset>
+                            <fieldset class="form-label-group">
+                                <input type="password" class="form-control" id="user-password" name="password" placeholder="Your Password" required="" autofocus="">
                                 <label for="user-password">Password</label>
                             </fieldset>
                             <div class="form-group row">

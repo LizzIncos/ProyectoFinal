@@ -51,16 +51,16 @@
                         <p class="mb-3 text-center">Inicia Sesion</p>
                                           
                         <?php
-                        echo form_open_multipart("login/validarusuario");
+                        echo form_open_multipart("login/validarlogin");
                         ?>
 
                             <fieldset class="form-label-group">
-                                <input type="text" class="form-control" name="login" placeholder="Your Username" required>
-                                <label for="user-name">Username</label>
+                                <input type="text" class="form-control" id="correo" name="correo" placeholder="Your Username" required>
+                                <label for="correo">Email</label>
                             </fieldset>
                             <fieldset class="form-label-group">
-                                <input type="password" class="form-control" name="password"  placeholder="Enter Password" required>
-                                <label for="user-password">Password</label>
+                                <input type="password" class="form-control" id="password" name="password"  placeholder="Enter Password" required>
+                                <label for="password">Password</label>
                             </fieldset>
                             <div class="form-group row">
                                 <div class="col-md-6 col-12 text-center text-sm-left">

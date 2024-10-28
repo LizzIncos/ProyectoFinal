@@ -139,7 +139,7 @@ class Producto extends CI_Controller {
 		
 
          // Obtener datos capturados
-    $capturedData = $this->input->post(); // Recibir todos los datos enviados
+		 $capturedData = $this->request->getPost(); // Recibir todos los datos enviados
 
     // Verificar que los campos esperados están presentes
     if (isset($capturedData['prod_name']) && isset($capturedData['category'])) {
@@ -149,38 +149,58 @@ class Producto extends CI_Controller {
         // Validar si se encontró información del producto
         if (empty($data['nombre']) || empty($data['categoria'])) {
             $data['error'] = 'No se pudo obtener información del producto.';
-            $this->load->view('producto/registrar', $data);
+            $this->load->view('producto/agregar', $data);
             return;
         }
     } else {
         $data['error'] = 'No se recibieron datos válidos del producto.';
-        $this->load->view('producto/registrar', $data);
+        $this->load->view('producto/agregar', $data);
         return;
     }
 
-    // Registrar el producto en la base de datos
+    
     $this->producto_model->agregarproducto($data);
     
-    // Redirigir al menú de productos
+    
     redirect('producto/menu', 'refresh');
 		
 	}
 	public function iniciarCaptura() {
-		
-		$url = 'http://127.0.0.1:5001/capture'; // URL de tu nueva API
-        $response = file_get_contents($url);
-        $data = json_decode($response, true);
 
+		$url = 'http://127.0.0.1:5001/capture'; 
+
+    
+    	$ch = curl_init($url);
+
+   
+    	
+		//curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_POST, 1);  
+        //curl_setopt($ch, CURLOPT_TIMEOUT, 20);
+
+    // Ejecutar la petición
+    	$response = curl_exec($ch);
+		curl_close($ch);
+    // Verificar si hubo un error
+    if ($response === false){
+        $error_msg = curl_error($ch);
+        $this->session->set_flashdata('error', "Error: $error_msg");
+    } else {
         // Procesar la respuesta
+        $data = json_decode($response, true);
+        
         if (isset($data['prod_name']) && isset($data['category'])) {
-			$this->session->set_flashdata('captured_image', $data['image']);
+			
 			$this->session->set_flashdata('prod_name', $data['prod_name']);
 			$this->session->set_flashdata('category', $data['category']);
 		} else {
 			$this->session->set_flashdata('error', 'No se pudo capturar la imagen.');
 		}
+	}
+	
 
         //redirect('producto/agregar', 'refresh');
 	}
-
+	
 }

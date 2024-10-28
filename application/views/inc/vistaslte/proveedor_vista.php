@@ -28,9 +28,13 @@
     <!--/ TetherUSD -->
 
     <div class="row">
+    
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-body">
+                                <?php echo form_open_multipart('proveedor/listapdf'); ?>
+                                    <button type="submit" name="buton2" class="btn btn-success">PDF</button>
+                                <?php echo form_close(); ?>
                                     <div class="table-responsive">
                                         <table class="table">
                                             <thead class="thead-light">
@@ -125,6 +129,6 @@
         
       </div>
     </div>
-    <!-- ////////////////////////////////////////////////////////////////////////////-->
+ 
 
 

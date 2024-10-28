@@ -4,9 +4,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Pedido extends CI_Controller {
 
 	public function demo(){
+		$lista=$this->pedido_model->listapedidos();
+		$data['pedidos']=$lista;
+		
 		$this->load->view('inc/vistaslte/header');
 		$this->load->view('inc/vistaslte/menu');
-		$this->load->view('inc/vistaslte/pedido_vista');			
+		$this->load->view('inc/vistaslte/pedido_vista',$data);			
 		$this->load->view('inc/vistaslte/footer');
 	}
 

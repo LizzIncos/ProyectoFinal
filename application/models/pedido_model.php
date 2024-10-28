@@ -57,6 +57,15 @@ class Pedido_model extends CI_Model {
         $this->db->update('inventario');
     }
 
+	public function listapedidos()
+	{
+		$this->db->select('pedido.*,producto.producto');
+		$this->db->from('pedido');
+		$this->db->join('producto','producto.idproducto = pedido.idproducto');
+		$this->db->where('estado','activo');
+		return $this->db->get(); 
+	}
+
     public function eliminarpedido($idproducto)
 	{
 		$this->db->where('idproducto',$idproducto);

@@ -1,6 +1,4 @@
 
-
-
 <div class="app-content content">
       <div class="content-wrapper">
         <div class="content-header row">
@@ -42,7 +40,8 @@
                                                 <th>Pedidos</th>
                                                 <th>Inventario disponible</th>
                                                 
-                                                <th>Estado</th>                                                
+                                                <th>Estado</th>    
+                                                <th>Observacion</th>                                             
                                                 
                                             </tr><!--end tr-->
                                             </thead>
@@ -61,7 +60,16 @@
                                                 <td><?php echo $row['pedido']; ?></td>
                                                 <td><?php echo $row['inventarioDisponible']; ?></td>
                                                
-                                                <td><?php echo $row['estado']; ?></td>                                                
+                                                <td><?php echo $row['estado']; ?></td>  
+                                                <td><?php 
+                                                  
+                                                    if ($row['estado'] === 'no disponible') {
+                                                        echo 'Reabastecimiento solicitado';
+                                                    } else {
+                                                        echo 'N/A';
+                                                    }
+                                                    ?>
+                                                </td>                                              
                                                 
                                                 
                                             </tr><!--end tr-->
@@ -101,9 +109,6 @@
                         </div> <!--end col-->                               
 </div>
 <!--end row--> 
-
-
-
 
 
 <!-- Purchase with BTC Modal -->

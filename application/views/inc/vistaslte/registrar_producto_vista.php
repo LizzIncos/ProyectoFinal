@@ -100,13 +100,16 @@
                     <div class="text-center row clearfix mb-2">
                         <div class="col-12">
                             <i class="icon-layers font-large-3 bg-warning bg-glow white rounded-circle p-3 d-inline-block"></i>
+                            <img src="http://127.0.0.1:5001/video_feed" width="440" height="280" alt="Video de la cámara" id="camera-feed">
                         </div>
                     </div>
                     <h3 class="text-center">Cargar Producto</h3>
-                    <div class="form-group">
-                       
-                        <button type="button" onclick="window.location.href='<?php echo site_url('producto/iniciarCaptura'); ?>'" class="btn btn-primary">Cargar Producto</button>
-                    </div>
+                    <form action="<?php echo site_url('producto/iniciarCaptura'); ?>" method="post">
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Cargar Producto</button>
+                        
+                        </div>
+                    </form>
                     <p id="productInfo" class="text-center"></p>
                 </div>
                 <div class="table-responsive">

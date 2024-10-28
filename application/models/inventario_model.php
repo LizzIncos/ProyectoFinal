@@ -5,50 +5,29 @@ class Inventario_model extends CI_Model {
 
 	public function listainventario()
 	{
-		$this->db->select('idproducto,cantidad'); 
-		$this->db->from('producto '); 
+		$this->db->select('p.idproducto, p.cantidad as inventarioRecibido, 
+						   COALESCE(SUM(pd.cantidad), 0) as pedido, 
+						   (p.cantidad - COALESCE(SUM(pd.cantidad), 0)) as inventarioDisponible, 
+						   CASE WHEN (p.cantidad - COALESCE(SUM(pd.cantidad), 0)) <= 0 THEN "no disponible" ELSE "disponible" END as estado');
+		$this->db->from('producto p');
+		$this->db->join('pedido pd', 'pd.idproducto = p.idproducto', 'left'); 
+		$this->db->group_by('p.idproducto'); 
 
-		$productos= $this->db->get()->result_array(); 
-		
-		$inventario = [];
-
-		foreach($productos as $producto){
-			$this->db->select_sum('cantidad');
-        	$this->db->where('idproducto', $producto['idproducto']);
-        	$query = $this->db->get('pedido');
-        	$pedido = $query->row_array();
+		$query = $this->db->get();
+		$inventario = $query->result_array();
 
 		
-		
+		foreach ($inventario as $data) {
+			$this->db->where('idproducto', $data['idproducto']);
+			$data3 = $this->db->get('inventario');
 
-		$data=array(
-			'idproducto'=>$producto['idproducto'],
-			'inventarioRecibido'=>$producto['cantidad'],
-			'pedido'=>$pedido['cantidad'],
-			'inventarioDisponible'=>$producto['cantidad'] - ($pedido['cantidad']),
-			'estado'=>'disponible'
-		);
-
-		if ($data['inventarioDisponible']<=0){
-			$data['estado'] = 'no disponible';
+			if ($data3->num_rows() > 0) {
+				$this->db->where('idproducto', $data['idproducto']);
+				$this->db->update('inventario', $data);
+			} else {
+				$this->db->insert('inventario', $data);
+			}
 		}
-
-		$this->db->where('idproducto',$producto['idproducto']);
-		$data3 = $this->db->get('inventario');
-
-		
-
-		if($data3->num_rows()>0){
-			$this->db->where('idproducto',$producto['idproducto']);
-			$this->db->update('inventario',$data);
-		}
-		else{
-			$this->db->insert('inventario',$data);
-		}
-
-		$inventario[]=$data;
-		
-	}
 
 		return $inventario;
 	

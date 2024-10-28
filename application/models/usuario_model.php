@@ -14,6 +14,7 @@ class Usuario_model extends CI_Model {
 	public function agregarusuario($data)
 	{
 		$this->db->insert('personas',$data);
+		return $this->db->insert_id();
 	}
 
 	public function eliminarusuario($idEstudiante)

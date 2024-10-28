@@ -13,7 +13,7 @@ class Usuario extends CI_Controller {
 	public function index()
 	{
         
-		if($this->session->userdata('tipo')=='admin')
+		if($this->session->userdata('rol')=='4')
 		{ 
 			$lista=$this->usuario_model->listausuarios();
 			$data['personas']=$lista;
@@ -30,21 +30,7 @@ class Usuario extends CI_Controller {
 	}
 
 
-	public function inscribir()
-	{
-		if($this->session->userdata('tipo')=='admin')
-		{ 
-			$data['infocarreras']=$this->carrera_model->listaCarreras();
-			
-			$this->load->view('inc/header');
-			$this->load->view('inscribirform',$data);
-			$this->load->view('inc/footer');
-		}
-		else
-		{
-			redirect('usuarios/panel','refresh');
-		}
-	}
+	
 
 	public function inscribirbd()
 	{
@@ -64,7 +50,7 @@ class Usuario extends CI_Controller {
 
 	public function guest()
 	{
-		if($this->session->userdata('tipo')=='guest')
+		if($this->session->userdata('rol_idrol')=='4')
 		{ 
 			$this->load->view('inc/vistaslte/header');
 			$this->load->view('inc/vistaslte/login_vista');
@@ -75,23 +61,30 @@ class Usuario extends CI_Controller {
 	public function agregar()
 	{
 		
-		$this->load->view('inc/vistaslte/registrarse');
+		$this->load->view('inc/vistaslte/registrarse_vista');
 		
 	}
 
 
 	public function agregarbd()
 	{
+
 		$data['nombre']=strtoupper($_POST['nombre']);
 		$data['primerApellido']=strtoupper($_POST['primerApellido']);
 		$data['segundoApellido']=strtoupper($_POST['segundoApellido']);
         $data['carnet']=$_POST['carnet'];
         $data['telefono']=$_POST['telefono'];
-        $data['rol']=$_POST['rol'];
-        $data['estado']=strtoupper($_POST['estado']);
+		$data['rol']=strtoupper('invitado');
+        $data['estado']=strtoupper('inactivo');
 
+		$idusuario = $this->usuario_model->agregarusuario($data);
 
-		$lista=$this->usuario_model->agregarusuario($data);
+		$login['correo']=$_POST['correo'];
+        $login['password']=password_hash ($_POST['password'],PASSWORD_BCRYPT);
+		$login['idEstudiante']=$idusuario;
+		$login['rol_idrol']= 4;
+		
+		$this->login_model->agregarlogin($login);
 		redirect('usuario/index','refresh');
 	}
 
